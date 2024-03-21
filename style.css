@@ -1,0 +1,233 @@
+.navbarBox {
+    width: 100%;
+    background-color: #ffffff;
+    height: 10vh;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.navbarContainer
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 80%;
+    gap: 75px;
+}
+
+.navbarLinks
+{
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    gap: 50px;
+}
+
+body
+{
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+.logo
+{
+    width: 150px;
+}
+
+.btn
+{
+    width: 100px;
+}
+
+.navbarLinks > li
+{
+    font-size:20px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.heroContainer
+{
+    background-color: #D3E3E8;
+    height: 75vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.boldText
+{
+    font-size: 50px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.heroLine
+{
+    font-size: 25px;
+}
+
+.FindJobBtn
+{
+    background-color: black;
+    color: white;
+    width:200px;
+    height: 3rem;
+    border-radius: 25px;
+    font-size: 20px;
+}
+
+.findContainer
+{
+    display: flex;
+    justify-content: center;
+}
+
+.searchContainer2 
+{
+    box-shadow: 6px 6px 4px #333333;
+    width: 40%;
+    background-color: #ffffff;
+    height: 150px;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    gap: 20px;
+}
+
+.searchContainer 
+{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    transform: translateY(-100px);
+}
+
+.searchJob {
+    background-color: #ffffff;
+    border-radius: 25px;
+    height: 50px;
+    padding: 10px;
+    border: 1px solid grey;
+    display: flex;
+    align-items: center;
+}
+
+.searchJob input {
+    background-color: transparent;
+    border: 0px;
+    flex: 1;
+}
+
+.searchJob input:focus {
+    outline: none;
+}
+
+.dropdown {
+    position: relative;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 150px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+    padding: 5px;
+    margin-top: 50px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 5px 10px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+/* .searchJob input[type="text"] {
+    border: none;
+    outline: none; 
+} */
+
+.searchLocation
+{
+    width: 150px;
+    background-color: #ffffff;
+    border-radius: 25px;
+    height: 50px;
+    padding: 10px;
+    border: 1px solid grey;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.searchType
+{
+    width: 150px;
+    background-color: #ffffff;
+    border-radius: 25px;
+    height: 50px;
+    padding: 10px;
+    border: 1px solid grey;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.searchJobs
+{
+   background-color: #2062E2; 
+   color: white;
+   height: 50px;
+   width: 150px;
+   font-size: 20px;
+   border-radius: 25px;
+   border: 0px;
+}
+
+
+.searchJobs
+{
+   background-color: #2062E2; 
+   color: white;
+   height: 50px;
+   width: 150px;
+   font-size: 20px;
+   border-radius: 25px;
+   border: 0px;
+}
+
+.animate
+{
+    animation: searchButtonAnimation 1s forwards;
+}
+
+@keyframes searchButtonAnimation {
+    0%{
+        opacity: 1;
+    }
+    50%{
+        opacity: 0.5;
+    }
+    100%{
+        opacity: 1;
+    }
+}
