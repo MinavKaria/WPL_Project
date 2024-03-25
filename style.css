@@ -268,3 +268,38 @@ body
     display: none;
 }
 
+@media screen and (max-width:900px) {
+    .navbarLinks
+    {
+        display: none;
+    }
+
+    .searchContainer2
+    {
+        width: 50%;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+        height: max-content;
+    }
+
+    .boldText
+    {
+        font-size: 30px;
+    }
+
+    .heroContainer
+    {
+        height: 60vh;
+    }
+
+    .hero_svg
+    {
+        width: 200px;
+    }
+
+    .hero-head
+    {
+        padding: 75px;
+    }
+}
