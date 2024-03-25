@@ -1,10 +1,16 @@
 function animateButton()
 {
     const button=document.querySelector('.searchJobs');
-    button.classList.add('animate');
+    const loading=document.querySelector('.loader');
+    // button.classList.add('animate');
+    button.classList.add('hidden');
+    loading.classList.remove('unloading');
+    loading.classList.add('loading');
     setTimeout(() => {
-        button.classList.remove('animate');
-    }, 1000);
+        loading.classList.remove('loading');
+        loading.classList.add('unloading');
+        button.classList.remove('hidden');
+    }, 3000);
    
 }
 
