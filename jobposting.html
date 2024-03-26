@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Job Posting</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <style>
+    body, html {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      background-image: url('https://w0.peakpx.com/wallpaper/390/568/HD-wallpaper-artificial-intelligence-background-vectors-stock-psd-vision.jpg');
+      background-size: cover;
+      background-position: center;
+      cursor: pointer; /* Custom cursor */
+    }
+    .container {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .blue-box, .white-box {
+      border: 2px solid black;
+      border-radius: 10px;
+      padding: 20px;
+      background-color: white;
+      color: black;
+      transition: box-shadow 0.3s ease;
+      cursor: pointer; /* Custom cursor */
+      overflow: hidden;
+      position: relative;
+    }
+    .blue-box:hover, .white-box:hover {
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add box shadow on hover */
+    }
+    .btn-blue, .btn-primary {
+      background-color: #007bff;
+      color: black;
+      border-radius: 15px;
+      padding: 10px 20px;
+      border: 2px solid black;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .btn-blue:hover, .btn-primary:hover {
+      background-color: #0056b3; /* Darker shade of blue on hover */
+    }
+    .btn {
+      transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .btn:active {
+      transform: scale(0.95); /* Scale down slightly when clicked */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="blue-box text-center">
+          <h3>Post a Free Job</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula dolor eget magna aliquet.</p>
+          <button class="btn btn-blue">Post a Free Job</button>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="white-box text-center">
+          <h3>Post a Featured Job</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis vehicula dolor eget magna aliquet.</p>
+          <button class="btn btn-blue">Post a Featured Job</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
