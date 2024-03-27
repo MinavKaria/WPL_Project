@@ -3,96 +3,153 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sign Up</title>
+  <title>Young Gigs - Sign Up</title>
   <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
   <style>
-    .error {
-      color: red;
+    body {
+      background-color: #e9f5fe; /* Light blue background color */
+      background-image: url('https://www.transparenttextures.com/patterns/asfalt-dark.png'); /* Background pattern */
+      font-family: Arial, sans-serif; /* Use a common font */
+    }
+    .header {
+      background-color: #007bff;
+      color: #fff;
+      padding: 20px 0;
+      text-align: center;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 36px;
+    }
+    .signup-container {
+      margin-top: 50px;
+      border-radius: 10px;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      background-color: #fff;
+      border: 2px solid #007bff; /* Main border */
+      border-top: 0; /* Remove top border */
+      border-left: 0; /* Remove left border */
+      border-right: 0; /* Remove right border */
+    }
+   
+    .btn-signup {
+      background-color: #007bff;
+      border-color: #007bff;
+    }
+    .btn-signup:hover {
+      background-color: #0056b3;
+      border-color: #0056b3;
     }
   </style>
 </head>
 <body>
+  <div class="header">
+    <h1>Young Gigs</h1>
+  </div>
 
-<div class="container mt-5">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <h2 class="mb-4">Sign Up</h2>
-      <form id="signupForm">
-        <div class="form-group">
-          <label for="username">Username</label>
-          <input type="text" class="form-control" id="username" name="username" required>
-          <div id="usernameError" class="error"></div>
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <div class="card signup-container">
+          <div class="card-header">
+            <h3 class="text-center">Sign Up</h3>
+          </div>
+          <div class="card-body">
+            <form id="signupForm">
+              <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" placeholder="Enter your name" required>
+              </div>
+              <div class="form-group">
+                <label for="qualification">Qualification</label>
+                <input type="text" class="form-control" id="qualification" placeholder="Enter your qualification" required>
+              </div>
+              <div class="form-group">
+                <label for="phone">Phone No</label>
+                <input type="tel" class="form-control" id="phone" placeholder="Enter your phone number" pattern="[0-9]{10}" required>
+              </div>
+              <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Enter your email address" required>
+              </div>
+              <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Enter your password" minlength="6" required>
+              </div>
+              <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" minlength="6" required>
+              </div>
+              <div class="form-group">
+                <label for="resume">Resume</label>
+                <input type="file" class="form-control-file" id="resume" accept=".pdf,.doc,.docx" required>
+              </div>
+              <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" class="form-control" id="age" placeholder="Enter your age" required>
+              </div>
+              <div class="form-group">
+                <label for="degree">Degree</label>
+                <input type="text" class="form-control" id="degree" placeholder="Enter your degree" required>
+              </div>
+              <button type="submit" class="btn btn-primary btn-block btn-signup">Sign Up</button>
+            </form>
+          </div>
         </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" class="form-control" id="email" name="email" required>
-          <div id="emailError" class="error"></div>
-        </div>
-        <div class="form-group">
-          <label for="password">Password</label>
-          <input type="password" class="form-control" id="password" name="password" required>
-          <div id="passwordError" class="error"></div>
-        </div>
-        <button type="submit" class="btn btn-primary">Sign Up</button>
-      </form>
+      </div>
     </div>
   </div>
-</div>
 
-<!-- Bootstrap JS and jQuery -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
-  document.getElementById('signupForm').addEventListener('submit', function(event) {
-    event.preventDefault();
-    validateForm();
-  });
+  <!-- Bootstrap JS and jQuery -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-  function validateForm() {
-    const username = document.getElementById('username').value.trim();
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value.trim();
-    let isValid = true;
+  <script>
+    document.getElementById("signupForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      var name = document.getElementById("name").value;
+      var qualification = document.getElementById("qualification").value;
+      var phone = document.getElementById("phone").value;
+      var email = document.getElementById("email").value;
+      var password = document.getElementById("password").value;
+      var confirmPassword = document.getElementById("confirmPassword").value;
+      var resume = document.getElementById("resume").files[0].name;
+      var age = document.getElementById("age").value;
+      var degree = document.getElementById("degree").value;
 
-    // Username validation
-    if (username === '') {
-      document.getElementById('usernameError').innerText = 'Username is required';
-      isValid = false;
-    } else {
-      document.getElementById('usernameError').innerText = '';
-    }
+      // Basic validation
+      if(name.trim() === "") {
+        alert("Please enter your name.");
+        return;
+      }
 
-    // Email validation
-    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (email === '') {
-      document.getElementById('emailError').innerText = 'Email is required';
-      isValid = false;
-    } else if (!emailPattern.test(email)) {
-      document.getElementById('emailError').innerText = 'Invalid email address';
-      isValid = false;
-    } else {
-      document.getElementById('emailError').innerText = '';
-    }
+      if(qualification.trim() === "") {
+        alert("Please enter your qualification.");
+        return;
+      }
 
-    // Password validation
-    if (password === '') {
-      document.getElementById('passwordError').innerText = 'Password is required';
-      isValid = false;
-    } else if (password.length < 6) {
-      document.getElementById('passwordError').innerText = 'Password must be at least 6 characters';
-      isValid = false;
-    } else {
-      document.getElementById('passwordError').innerText = '';
-    }
+      if(phone.trim() === "") {
+        alert("Please enter your phone number.");
+        return;
+      }
 
-    // Submit if form is valid
-    if (isValid) {
-      alert('Form submitted successfully');
-      // Here you can submit the form to the server
-    }
-  }
-</script>
-</body>
-</html>
+      if(email.trim() === "") {
+        alert("Please enter your email address.");
+        return;
+      }
+
+      if(password.trim() === "") {
+        alert("Please enter your password.");
+        return;
+      }
+
+      if(confirmPassword.trim() === "") {
+        alert("Please confirm your password.");
+        return;
+      }
+
+      if(password !== confirmPassword)
