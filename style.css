@@ -102,6 +102,9 @@ body
     height: 3rem;
     border-radius: 25px;
     font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .findContainer
@@ -268,12 +271,87 @@ body
     display: none;
 }
 
+.cards
+{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    padding-right: 10%;
+    padding-left: 10%;
+    margin-right: auto;
+    margin-left: auto;
+    gap: 15px;
+}
+
+.card1
+{
+    border: 1px solid black;
+    width: 100%;
+    height: 100%;
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    min-height: 250px;
+}
+
+.card1 > button
+{
+    background-color: blue;
+    border: 0px;
+    color: white;
+    padding: 15px;
+    border-radius:25px;
+}
+
+
+
+.card2
+{
+    border: 1px solid black;
+    width: 100%;
+    height: 100%;
+    border-radius: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    min-height: 250px;
+    background-color: #2062E2;
+    color: white;
+}
+
+.card2 > button
+{
+    background-color: white;
+    border: 0px;
+    color: blue;
+    padding: 15px;
+    border-radius:25px;
+}
+
+.bg-color
+{
+    background-color: rgba(106, 102, 102, 0.108);
+    width: 100%;
+    padding-left: 50px;
+    padding-right: 50px;
+    padding-top: 50px;
+    padding-bottom: 0;
+}
+
+
+
 @media screen and (max-width:900px) {
     .navbarLinks
     {
         display: none;
     }
-
+    .cards
+    {
+        flex-direction: column;
+    }
     .searchContainer2
     {
         width: 50%;

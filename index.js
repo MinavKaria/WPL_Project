@@ -1,21 +1,22 @@
-function animateButton()
-{
-    const button=document.querySelector('.searchJobs');
-    const loading=document.querySelector('.loader');
-    // button.classList.add('animate');
+async function animateButton() {
+
+    // window.location.href = 'http://localhost/WPL%20%20Mini%20Project/WPL_Project/jobpage.html';
+    const button = document.querySelector('.searchJobs');
+    const loading = document.querySelector('.loader');
+    
     button.classList.add('hidden');
     loading.classList.remove('unloading');
     loading.classList.add('loading');
-    setTimeout(() => {
+    
+    await setTimeout(() => {
         loading.classList.remove('loading');
         loading.classList.add('unloading');
         button.classList.remove('hidden');
+        console.log("Redirecting to jobpage.html");
     }, 3000);
-   
-}
 
-// function openTypeMenu()
-// {
-//     const dropdown1=document.querySelector('.searchType');
-//     button.classList.add('animate');
-// }
+    // Redirect after animation is complete
+   console.log("Redirecting to jobpage.html");
+
+    
+}
