@@ -25,10 +25,12 @@ session_start();
         $row = $result->fetch_assoc();
         $name = $row['name'];
         $hashedPassword = $row['password'];
+        $isHR = $row['is_hr'];
 
         if (password_verify($password, $hashedPassword)) {
             $_SESSION['email'] = $email;
             $_SESSION['name'] = $name;
+            $_SESSION['is_hr'] = $isHR;
             echo "Logged in successfully";
             Header("Location: index.php");
             

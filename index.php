@@ -12,36 +12,9 @@
 </head>
 
 <body>
-  <div class="navbarBox">
-    <div class="navbarContainer">
-      <div>
-        <a href="index.html"><img src="assets/YoungGigs.svg" alt="" class="logo"></a>
-      </div>
-      <ul class="navbarLinks list-unstyled">
-        <li><a href="jobpage.html" class="text-decoration-none text-body-secondary">Find Work</a></li>
-        <li><a href="" class="text-decoration-none text-body-secondary">Applications</a></li>
-        <li><a href="" class="text-decoration-none text-body-secondary">Upskill</a></li>
-        <li><a href="postJob.html" class="text-decoration-none text-body-secondary">Post Job</a></li>
-      </ul>
-
-      <div class="d-flex gap-2 justify-content-center">
-        <?php
-        session_start();
-
-        if (isset($_SESSION['email']) && isset($_SESSION['name'])) {
-          $name = $_SESSION['name'];
-
-          echo '<p class="text-body-secondary ">Welcome, ' . $name . '</p>
-                <a href="logout.php" class="btn btn-danger">Logout</a>
-                  ';
-        } else {
-          echo '<a href="login.html" class="text-decoration-none text-body-secondary">Login</a>';
-        }
-        ?>
-
-      </div>
-    </div>
-  </div>
+<?php
+include 'authguard.php';
+?>
 
   <div class="heroContainer">
     <div>

@@ -7,6 +7,7 @@ $phone = $_POST['phone'];
 $password = $_POST['password'];
 $confirmPassword = $_POST['confirmPassword'];
 $age = $_POST['age'];
+$isHR=$_POST['is_hr'];
 
 if ($password != $confirmPassword) {
     echo "Password and Confirm Password do not match";
@@ -27,9 +28,9 @@ move_uploaded_file($_FILES["resume"]["tmp_name"], $resumeFilePath);
 $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
 // Use prepared statements to prevent SQL injection
-$stmt = $conn->prepare("INSERT INTO users (name, qualification, email, password, phone, resume, age) VALUES (?, ?, ?, ?, ?, ?, ?)");
+$stmt = $conn->prepare("INSERT INTO users (name, qualification, email, password, phone, resume, age,is_hr) VALUES (?, ?, ?, ?, ?, ?, ?,?)");
 
-$stmt->bind_param("ssssssi", $name, $qualification, $email, $hashedPassword, $phone, $resumeFileName, $age);
+$stmt->bind_param("ssssssis", $name, $qualification, $email, $hashedPassword, $phone, $resumeFileName, $age,$isHR);
 
 if ($stmt->execute()) {
     echo "New record created successfully";
