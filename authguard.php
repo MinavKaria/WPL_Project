@@ -12,6 +12,12 @@
         <li><a href="postJob.html" class="text-decoration-none text-body-secondary">Post Job</a></li> -->
         <?php
         session_start();
+        if(isset($_SESSION['user_id'])){
+          $userID = $_SESSION['user_id'];
+        }
+        else{
+          $userID = "";
+        }
 
         if(isset($_SESSION['is_hr'])){
           $isHR = $_SESSION['is_hr'];
@@ -22,13 +28,13 @@
         if($isHR==='yes' && isset($_SESSION['email'])){
           echo '
           <li><a href="postJob.php" class="text-decoration-none text-body-secondary">Post Job</a></li>
-          <li><a href="" class="text-decoration-none text-body-secondary">Applications Received</a></li>
+          <li><a href="applicationGot.php" class="text-decoration-none text-body-secondary">Applications Received</a></li>
           ';
         }
         else if($isHR==='no' && isset($_SESSION['email'])){
           echo '
           <li><a href="jobpage.php" class="text-decoration-none text-body-secondary">Find Work</a></li>
-          <li><a href="" class="text-decoration-none text-body-secondary">Applications</a></li>
+          <li><a href="application.php" class="text-decoration-none text-body-secondary">Applications</a></li>
           <li><a href="upskill.php" class="text-decoration-none text-body-secondary">Upskill</a></li>
           ';
         }

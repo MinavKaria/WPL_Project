@@ -65,44 +65,23 @@
             Select Skills
           </label>
           <select name="skills[]" class="form-select" aria-placeholder="Select Skills" aria-label="Filter Jobs by Skills" id="filter-skills" multiple required>
-            <option value="html">HTML</option>
-            <option value="css">CSS</option>
-            <option value="javascript">JavaScript</option>
-            <option value="php">PHP</option>
-            <option value="python">Python</option>
-            <option value="java">Java</option>
-            <option value="c#">C#</option>
-            <option value="c++">C++</option>
-            <option value="ruby">Ruby</option>
-            <option value="swift">Swift</option>
-            <option value="kotlin">Kotlin</option>
-            <option value="flutter">Flutter</option>
-            <option value="react">React</option>
-            <option value="angular">Angular</option>
-            <option value="vue">Vue</option>
-            <option value="laravel">Laravel</option>
-            <option value="django">Django</option>
-            <option value="express">Express</option>
-            <option value="spring">Spring</option>
-            <option value="node">Node</option>
-            <option value="mongodb">MongoDB</option>
-            <option value="mysql">MySQL</option>
-            <option value="postgresql">PostgreSQL</option>
-            <option value="sql">SQL</option>
-            <option value="nosql">NoSQL</option>
-            <option value="firebase">Firebase</option>
-            <option value="aws">AWS</option>
-            <option value="azure">Azure</option>
-            <option value="gcp">GCP</option>
-            <option value="docker">Docker</option>
-            <option value="kubernetes">Kubernetes</option>
-            <option value="jenkins">Jenkins</option>
-            <option value="git">Git</option>
-            <option value="github">GitHub</option>
-            <option value="gitlab">GitLab</option>
-            <option value="bitbucket">Bitbucket</option>
-            <option value="jira">Jira</option>
-            <option value="trello">Trello</option>
+            <?php
+            $conn = new mysqli("localhost", "root", "", "younggigs");
+
+            if ($conn->connect_error) {
+              die("Connection failed: " . $conn->connect_error);
+            }
+
+            $sql = "SELECT * FROM skills";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+              while ($row = $result->fetch_assoc()) {
+                $capitalizedSkill = ucwords($row['skill']);
+                echo '<option value="' . $row['skill'] . '">' . $capitalizedSkill . '</option>';
+              }
+            }
+            ?>
           </select>
           <div class="col-md-6">
             <button type="submit" class="btn btn-primary mt-3 w-100">Search Jobs</button>

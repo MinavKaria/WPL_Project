@@ -35,6 +35,7 @@
         jobs.location,
         jobs.type,
         jobs.description,
+        jobs.company_name,
         GROUP_CONCAT(skills.skill SEPARATOR ', ') AS job_skills
     FROM 
         jobs
@@ -96,6 +97,7 @@
             jobs.location,
             jobs.type,
             jobs.description,
+            jobs.company_name,
             GROUP_CONCAT(skills.skill SEPARATOR ', ') AS job_skills
         FROM 
             jobs
@@ -111,7 +113,7 @@
 
     // echo $query;
 
-    echo "<h1>Partial Match</h1>";
+    // echo "<h1>Match Found</h1>";
 
     $result = $conn->query($query);
 
@@ -120,14 +122,17 @@
         <div class='container mt-5'>
                 <div class='row'>
                     <div class='col-md-6'>
-                        <h3>Jobs Found</h3>
+                        <h3>Job Match Found</h3>
                         <table class='table'>
                             <thead>
                                 <tr>
+                                    <th scope='col'>Company</th>
                                     <th scope='col'>Title</th>
                                     <th scope='col'>Location</th>
                                     <th scope='col'>Type</th>
                                     <th scope='col'>Skills</th>
+                                
+                                    <th>Apply</th>
                                 </tr>
                             </thead>";
         while ($row = $result->fetch_assoc()) {
@@ -135,10 +140,12 @@
             
                             <tbody>
                                 <tr>
+                                    <td>" . $row['company_name'] . "</td>
                                     <td>" . $row['title'] . "</td>
                                     <td>" . $row['location'] . "</td>
                                     <td>" . $row['type'] . "</td>
                                     <td>" . $row['job_skills'] . "</td>
+                                    <td><a href='ApplyJob.php?id=" . $row['id'] . "'>Apply</a></td>
                                 </tr>
                             </tbody>
                         
@@ -154,66 +161,68 @@
         echo "0 results";
     }
 
-    echo "<h1>Exact Match</h1>";
+    // echo "<h1>Exact Match</h1>";
 
-    $query2 = "
-    SELECT * FROM (
-        SELECT 
-            jobs.id,
-            jobs.title,
-            jobs.location,
-            jobs.type,
-            jobs.description,
-            GROUP_CONCAT(skills.skill SEPARATOR ', ') AS job_skills
-        FROM 
-            jobs
-        INNER JOIN 
-            jobskills ON jobs.id = jobskills.job_id
-        INNER JOIN 
-            skills ON jobskills.skill_id = skills.id
-        GROUP BY 
-            jobs.id, jobs.title, jobs.location, jobs.type, jobs.description
-    ) AS job_details
-    WHERE 
-        job_details.location = '$location' AND job_details.job_skills LIKE '%" . implode("%' AND job_details.job_skills LIKE '%", $skills) . "%';";
+    // $query2 = "
+    // SELECT * FROM (
+    //     SELECT 
+    //         jobs.id,
+    //         jobs.title,
+    //         jobs.location,
+    //         jobs.type,
+    //         jobs.description,
+    //         GROUP_CONCAT(skills.skill SEPARATOR ', ') AS job_skills
+    //     FROM 
+    //         jobs
+    //     INNER JOIN 
+    //         jobskills ON jobs.id = jobskills.job_id
+    //     INNER JOIN 
+    //         skills ON jobskills.skill_id = skills.id
+    //     GROUP BY 
+    //         jobs.id, jobs.title, jobs.location, jobs.type, jobs.description
+    // ) AS job_details
+    // WHERE 
+    //     job_details.location = '$location' AND job_details.job_skills LIKE '%" . implode("%' AND job_details.job_skills LIKE '%", $skills) . "%';";
 
-    // echo $query2;
+    // // echo $query2;
 
-    $result = $conn->query($query2);
+    // $result = $conn->query($query2);
 
-    if ($result->num_rows > 0) {
-        while ($row = $result->fetch_assoc()) {
-            echo "
-            <div class='container mt-5'>
-                <div class='row'>
-                    <div class='col-md-6'>
-                        <h3>Jobs Found for Exact Match</h3>
-                        <table class='table'>
-                            <thead>
-                                <tr>
-                                    <th scope='col'>Title</th>
-                                    <th scope='col'>Location</th>
-                                    <th scope='col'>Type</th>
-                                    <th scope='col'>Skills</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>" . $row['title'] . "</td>
-                                    <td>" . $row['location'] . "</td>
-                                    <td>" . $row['type'] . "</td>
-                                    <td>" . $row['job_skills'] . "</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            ";
-        }
-    } else {
-        echo "0 results";
-    }
+    // if ($result->num_rows > 0) {
+    //     while ($row = $result->fetch_assoc()) {
+    //         echo "
+    //         <div class='container mt-5'>
+    //             <div class='row'>
+    //                 <div class='col-md-6'>
+    //                     <h3>Jobs Found for Exact Match</h3>
+    //                     <table class='table'>
+    //                         <thead>
+    //                             <tr>
+    //                                 <th scope='col'>Title</th>
+    //                                 <th scope='col'>Location</th>
+    //                                 <th scope='col'>Type</th>
+    //                                 <th scope='col'>Skills</th>
+    //                                 <th>Apply</th>
+    //                             </tr>
+    //                         </thead>
+    //                         <tbody>
+    //                             <tr>
+    //                                 <td>" . $row['title'] . "</td>
+    //                                 <td>" . $row['location'] . "</td>
+    //                                 <td>" . $row['type'] . "</td>
+    //                                 <td>" . $row['job_skills'] . "</td>
+    //                                 <td><a href='ApplyJob.php?id=" . $row['id'] . "'>Apply</a></td>
+    //                             </tr>
+    //                         </tbody>
+    //                     </table>
+    //                 </div>
+    //             </div>
+    //         </div>
+    //         ";
+    //     }
+    // } else {
+    //     echo "0 results";
+    // }
 
 
     // echo "

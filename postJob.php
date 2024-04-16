@@ -138,7 +138,7 @@
         
             <div class="container">
             <h1>Post a Job</h1>
-            <form action="./index.html" method="POST">
+            <form action="postJobs.php" method="POST">
                 <label for="job_title">Job Title:</label><br>
                 <input type="text" id="job_title" name="job_title" required><br>
 
@@ -151,6 +151,18 @@
                 <label for="description">Job Description:</label><br>
                 <textarea id="description" name="description" rows="4" cols="50" required></textarea><br>
 
+                <label for="type">Job Type:</label><br>
+                <select name="type" id="type" required>
+                    <option value="full-time">Full-Time</option>
+                    <option value="part-time">Part-Time</option>
+                    <option value="contract">Contract</option>
+                </select><br>
+                <br>
+
+                <label for="skills">Skills:</label><br>
+                <input type="text" id="skills" name="skills" placeholder="Enter the Skills with Comma" required><br>
+
+                
                 <input type="submit" value="Submit">
             </form>
         </div>

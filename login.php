@@ -26,11 +26,13 @@ session_start();
         $name = $row['name'];
         $hashedPassword = $row['password'];
         $isHR = $row['is_hr'];
+        $UserID = $row['user_id'];
 
         if (password_verify($password, $hashedPassword)) {
             $_SESSION['email'] = $email;
             $_SESSION['name'] = $name;
             $_SESSION['is_hr'] = $isHR;
+            $_SESSION['user_id'] = $UserID;
             echo "Logged in successfully";
             Header("Location: index.php");
             
