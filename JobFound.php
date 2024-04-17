@@ -88,7 +88,7 @@
     // ) AS job_details
     // WHERE 
     //     job_details.location = 'mumbai' AND job_details.job_skills LIKE '%html%';
-
+    $type=$_POST['jobType'];
     $query = "
     SELECT * FROM (
         SELECT 
@@ -109,7 +109,63 @@
             jobs.id, jobs.title, jobs.location, jobs.type, jobs.description
     ) AS job_details
     WHERE 
-        job_details.location = '$location' AND job_details.job_skills LIKE '%" . implode("%' OR job_details.job_skills LIKE '%", $skills) . "%';";
+        job_details.location = '$location' AND (job_details.job_skills LIKE '%" . implode("%' OR job_details.job_skills LIKE '%", $skills) . "%') 
+        OR job_details.type='$type';";
+
+    if($location=="all")
+    {
+        $query = "
+        SELECT * FROM (
+            SELECT 
+                jobs.id,
+                jobs.title,
+                jobs.location,
+                jobs.type,
+                jobs.description,
+                jobs.company_name,
+                GROUP_CONCAT(skills.skill SEPARATOR ', ') AS job_skills
+            FROM 
+                jobs
+            INNER JOIN 
+                jobskills ON jobs.id = jobskills.job_id
+            INNER JOIN 
+                skills ON jobskills.skill_id = skills.id
+            GROUP BY 
+                jobs.id, jobs.title, jobs.location, jobs.type, jobs.description
+        ) AS job_details
+        WHERE 
+            job_details.job_skills LIKE '%" . implode("%' OR job_details.job_skills LIKE '%", $skills) . "%' 
+            OR job_details.type='$type' 
+            ;";
+    }
+
+
+    if($type=="all")
+    {
+        $query = "
+        SELECT * FROM (
+            SELECT 
+            jobs.id,
+            jobs.title,
+            jobs.location,
+            jobs.type,
+            jobs.description,
+            jobs.company_name,
+            GROUP_CONCAT(skills.skill SEPARATOR ', ') AS job_skills
+            FROM 
+            jobs
+            INNER JOIN 
+            jobskills ON jobs.id = jobskills.job_id
+            INNER JOIN 
+            skills ON jobskills.skill_id = skills.id
+            GROUP BY 
+            jobs.id, jobs.title, jobs.location, jobs.type, jobs.description
+        ) AS job_details
+        WHERE 
+            job_details.location = '$location' AND (job_details.job_skills LIKE '%" . implode("%' OR job_details.job_skills LIKE '%", $skills) . "%') 
+            ;";
+    }
+
 
     // echo $query;
 
