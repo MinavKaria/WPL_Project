@@ -22,7 +22,26 @@
         <form id="search-form" action="JobFound.php" method="post">
           <select name="location" class="form-select mb-3" aria-label="Filter Jobs by Location" id="filter-location" required>
             <option value="all">All Locations</option>
-            <option value="mumbai">Mumbai</option>
+            <?php
+            $conn = new mysqli("localhost", "root", "", "younggigs");
+
+            if ($conn->connect_error) {
+              die("Connection failed: " . $conn->connect_error);
+            }
+
+            $sql = "SELECT DISTINCT location FROM jobs";
+            $result = $conn->query($sql);
+
+            if ($result->num_rows > 0) {
+              while ($row = $result->fetch_assoc()) {
+                $capitalizedSkill = ucwords($row['location']);
+                $lowercaseString = strtolower($row['location']);
+                echo '<option value="' . $lowercaseString . '">' . $capitalizedSkill . '</option>';
+
+              }
+            }
+            ?>
+            <!-- <option value="mumbai">Mumbai</option>
             <option value="kolkata">Kolkata</option>
             <option value="delhi">Delhi</option>
             <option value="bangalore">Bangalore</option>
@@ -52,7 +71,7 @@
             <option value="patiala">Patiala</option>
             <option value="meerut">Meerut</option>
             <option value="kalyan">Kalyan</option>
-            <option value="vasai-virar">Vasai-Virar</option>
+            <option value="vasai-virar">Vasai-Virar</option> -->
             <option value="remote">Remote</option>
           </select>
           <select name="jobType" class="form-select mb-3" aria-label="Filter Jobs by Job Type" id="filter-job-type" required>
