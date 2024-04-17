@@ -33,7 +33,7 @@
         SELECT DISTINCT jobskills.job_id
         FROM jobskills, userjobs 
         WHERE jobskills.job_id = userjobs.job_id 
-        AND userjobs.user_id = 9
+        AND userjobs.user_id = $userID
     );
     ";
 
