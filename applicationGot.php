@@ -26,14 +26,14 @@
 
     // SQL query to retrieve applied jobs data
     $sql= "
-    SELECT users.user_id, job_id, applied_date, resumeURL, name, email, qualification, phone, age 
-    FROM applied_jobs, users 
-    WHERE applied_jobs.user_id = users.user_id 
+    SELECT users.user_id, job_id, applied_date, resumeURL, name, email, qualification, phone, age,title 
+    FROM applied_jobs, users, jobs
+    WHERE applied_jobs.user_id = users.user_id and jobs.id=applied_jobs.job_id
     AND job_id IN (
         SELECT DISTINCT jobskills.job_id
         FROM jobskills, userjobs 
         WHERE jobskills.job_id = userjobs.job_id 
-        AND userjobs.user_id = $userID
+        AND userjobs.user_id = 9
     );
     ";
 
@@ -47,7 +47,7 @@
             <thead>
                 <tr>
                     <th>User ID</th>
-                    <th>Job ID</th>
+                    <th>Job Name</th>
                     <th>Applied Date</th>
                     <th>Resume URL</th>
                     <th>Name</th>
@@ -63,7 +63,7 @@
                     while ($row = $result->fetch_assoc()) {
                         echo "<tr>";
                         echo "<td>{$row['user_id']}</td>";
-                        echo "<td>{$row['job_id']}</td>";
+                        echo "<td>{$row['title']}</td>";
                         echo "<td>{$row['applied_date']}</td>";
                         echo "<td><a href='./uploads/".$row['resumeURL']."'>View Resume</a></td>";
                         echo "<td>{$row['name']}</td>";
