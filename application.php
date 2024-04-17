@@ -34,6 +34,7 @@ if(isset($_SESSION['user_id'])){
     FROM applied_jobs
     INNER JOIN jobs ON applied_jobs.job_id = jobs.id
     GROUP BY applied_jobs.job_id
+    HAVING applied_jobs.user_id = $userID
     ";
     $result = $conn->query($query);
     // $row = $result->fetch_assoc();  
