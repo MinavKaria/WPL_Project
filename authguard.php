@@ -29,6 +29,7 @@
           echo '
           <li><a href="postJob.php" class="text-decoration-none text-body-secondary">Post Job</a></li>
           <li><a href="applicationGot.php" class="text-decoration-none text-body-secondary">Applications Received</a></li>
+          <li><a href="applicationInserted.php" class="text-decoration-none text-body-secondary">Applications Posted</a></li>
           ';
         }
         else if($isHR==='no' && isset($_SESSION['email'])){

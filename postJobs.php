@@ -5,12 +5,16 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
+session_start();
+
 $title = $_POST['job_title'];
 $location = $_POST['location'];
 $type = $_POST['type'];
 $description = $_POST['description'];
 $company_name = $_POST['company'];
 $skills = $_POST['skills'];
+
+$user_id = $_SESSION['user_id'];
 
 // Separate the skills with commas
 $skills_array = explode(",", $skills);
@@ -29,6 +33,9 @@ $sql_job = "INSERT INTO jobs (title, location, type, description, company_name)
 if ($conn->query($sql_job) === TRUE) {
    
     $job_id = $conn->insert_id;
+
+    $sql_user_job = "INSERT INTO UserJobs (job_id, user_id) VALUES ('$job_id', '$user_id')";
+    $conn->query($sql_user_job);
     
    
     foreach ($skills_array as $skill) {
