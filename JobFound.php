@@ -89,31 +89,11 @@
     // WHERE 
     //     job_details.location = 'mumbai' AND job_details.job_skills LIKE '%html%';
     $type=$_POST['jobType'];
-    $query = "
-    SELECT * FROM (
-        SELECT 
-            jobs.id,
-            jobs.title,
-            jobs.location,
-            jobs.type,
-            jobs.description,
-            jobs.company_name,
-            GROUP_CONCAT(skills.skill SEPARATOR ', ') AS job_skills
-        FROM 
-            jobs
-        INNER JOIN 
-            jobskills ON jobs.id = jobskills.job_id
-        INNER JOIN 
-            skills ON jobskills.skill_id = skills.id
-        GROUP BY 
-            jobs.id, jobs.title, jobs.location, jobs.type, jobs.description
-    ) AS job_details
-    WHERE 
-        job_details.location = '$location' AND (job_details.job_skills LIKE '%" . implode("%' OR job_details.job_skills LIKE '%", $skills) . "%') 
-        OR job_details.type='$type';";
+    
 
     if($location=="all")
     {
+        echo 'hello';
         $query = "
         SELECT * FROM (
             SELECT 
@@ -140,32 +120,88 @@
     }
 
 
-    if($type=="all")
+   else if ($type == "all") {
+        echo 'hello2';
+        $query = "
+            SELECT * FROM (
+                SELECT 
+                    jobs.id,
+                    jobs.title,
+                    jobs.location,
+                    jobs.type,
+                    jobs.description,
+                    jobs.company_name,
+                    GROUP_CONCAT(skills.skill SEPARATOR ', ') AS job_skills
+                FROM 
+                    jobs
+                    INNER JOIN 
+                    jobskills ON jobs.id = jobskills.job_id
+                    INNER JOIN 
+                    skills ON jobskills.skill_id = skills.id
+                GROUP BY 
+                    jobs.id, jobs.title, jobs.location, jobs.type, jobs.description
+            ) AS job_details
+            WHERE 
+                job_details.location = '$location' AND (job_details.job_skills LIKE '%" . implode("%' OR job_details.job_skills LIKE '%", $skills) . "%') 
+        ;";
+    }
+    
+
+   else if ($type == 'all' && $location == 'all') {
+        echo 'hello3';
+        $query = "
+            SELECT * FROM (
+                SELECT 
+                    jobs.id,
+                    jobs.title,
+                    jobs.location,
+                    jobs.type,
+                    jobs.description,
+                    jobs.company_name,
+                    GROUP_CONCAT(skills.skill SEPARATOR ', ') AS job_skills
+                FROM 
+                    jobs
+                    INNER JOIN 
+                    jobskills ON jobs.id = jobskills.job_id
+                    INNER JOIN 
+                    skills ON jobskills.skill_id = skills.id
+                GROUP BY 
+                    jobs.id, jobs.title, jobs.location, jobs.type, jobs.description
+            ) AS job_details
+            WHERE 
+                (job_details.job_skills LIKE '%" . implode("%' OR job_details.job_skills LIKE '%", $skills) . "%') 
+        ;";
+    }
+
+
+    else 
     {
         $query = "
         SELECT * FROM (
             SELECT 
-            jobs.id,
-            jobs.title,
-            jobs.location,
-            jobs.type,
-            jobs.description,
-            jobs.company_name,
-            GROUP_CONCAT(skills.skill SEPARATOR ', ') AS job_skills
+                jobs.id,
+                jobs.title,
+                jobs.location,
+                jobs.type,
+                jobs.description,
+                jobs.company_name,
+                GROUP_CONCAT(skills.skill SEPARATOR ', ') AS job_skills
             FROM 
-            jobs
+                jobs
             INNER JOIN 
-            jobskills ON jobs.id = jobskills.job_id
+                jobskills ON jobs.id = jobskills.job_id
             INNER JOIN 
-            skills ON jobskills.skill_id = skills.id
+                skills ON jobskills.skill_id = skills.id
             GROUP BY 
-            jobs.id, jobs.title, jobs.location, jobs.type, jobs.description
+                jobs.id, jobs.title, jobs.location, jobs.type, jobs.description
         ) AS job_details
         WHERE 
-            job_details.location = '$location' AND (job_details.job_skills LIKE '%" . implode("%' OR job_details.job_skills LIKE '%", $skills) . "%') 
+        LOWER(job_details.location) = LOWER('$location') AND  job_details.job_skills LIKE '%" . implode("%' OR job_details.job_skills LIKE '%", $skills) . "%' AND job_details.type='$type' 
             ;";
-    }
 
+        
+    }
+    
 
     // echo $query;
 
@@ -201,7 +237,7 @@
                                     <td>" . $row['location'] . "</td>
                                     <td>" . $row['type'] . "</td>
                                     <td>" . $row['job_skills'] . "</td>
-                                    <td><a href='ApplyJob.php?id=" . $row['id'] . "'>Apply</a></td>
+                                    <td><a href='ApplyJob.php?id=" . $row['id'] . "' onclick='return confirmApply()' >Apply</a></td>
                                 </tr>
                             </tbody>
                         
@@ -316,5 +352,11 @@
 
     ?>
 </body>
+<script>
+    function confirm()
+    {
+       return confirm('Are you sure you wanna apply ?')
+    }
+</script>
 
 </html>

@@ -26,51 +26,66 @@ $skills_array = array_filter($skills_array);
 // Initialize an array to store skill IDs
 $skill_ids = array();
 
-// Insert job details into the 'jobs' table
-$sql_job = "INSERT INTO jobs (title, location, type, description, company_name) 
-            VALUES ('$title', '$location', '$type', '$description', '$company_name')";
+// Prepare the insert statement for skills outside the loop
+$stmt_insert_skill = $conn->prepare("INSERT INTO skills (skill) VALUES (?)");
+$stmt_insert_skill->bind_param("s", $skill);
 
-if ($conn->query($sql_job) === TRUE) {
-   
-    $job_id = $conn->insert_id;
-
-    $sql_user_job = "INSERT INTO UserJobs (job_id, user_id) VALUES ('$job_id', '$user_id')";
-    $conn->query($sql_user_job);
+foreach ($skills_array as $skill) {
+    // Check if skill exists
+    $sql_check_skill = "SELECT id FROM skills WHERE skill = ?";
+    $stmt_check_skill = $conn->prepare($sql_check_skill);
+    $stmt_check_skill->bind_param("s", $skill);
+    $stmt_check_skill->execute();
+    $result = $stmt_check_skill->get_result();
     
-   
-    foreach ($skills_array as $skill) {
-   
-        $sql_check_skill = "SELECT id FROM skills WHERE skill = '$skill'";
-        $result = $conn->query($sql_check_skill);
-        
-    
-        if ($result->num_rows == 0) {
-            $sql_insert_skill = "INSERT INTO skills (skill) VALUES ('$skill')";
-            $conn->query($sql_insert_skill);
-            
-          
-            $skill_id = $conn->insert_id;
-        } else {
-        
-            $row = $result->fetch_assoc();
-            $skill_id = $row['id'];
-        }
-        
-        
-        $skill_ids[] = $skill_id;
+    if ($result->num_rows == 0) {
+        // If skill does not exist, execute the insert statement
+        $stmt_insert_skill->execute();
+        $skill_id = $conn->insert_id;
+    } else {
+        // If skill exists, get its ID
+        $row = $result->fetch_assoc();
+        $skill_id = $row['id'];
     }
     
- 
+    $skill_ids[] = $skill_id;
+}
+
+// Close the statement after the loop
+$stmt_insert_skill->close();
+
+// Insert job details into the 'jobs' table using prepared statement
+$sql_job = "INSERT INTO jobs (title, location, type, description, company_name) 
+            VALUES (?, ?, ?, ?, ?)";
+$stmt_job = $conn->prepare($sql_job);
+$stmt_job->bind_param("sssss", $title, $location, $type, $description, $company_name);
+
+if ($stmt_job->execute()) {
+    $job_id = $conn->insert_id;
+
+    // Insert user job relationship
+    $sql_user_job = "INSERT INTO UserJobs (job_id, user_id) VALUES (?, ?)";
+    $stmt_user_job = $conn->prepare($sql_user_job);
+    $stmt_user_job->bind_param("ii", $job_id, $user_id);
+    $stmt_user_job->execute();
+    
+    // Insert job-skill relationships
     foreach ($skill_ids as $skill_id) {
-        $sql_pivot = "INSERT INTO jobskills (job_id, skill_id) 
-                      VALUES ('$job_id', '$skill_id')";
-        $conn->query($sql_pivot);
+        $sql_pivot = "INSERT INTO jobskills (job_id, skill_id) VALUES (?, ?)";
+        $stmt_pivot = $conn->prepare($sql_pivot);
+        $stmt_pivot->bind_param("ii", $job_id, $skill_id);
+        $stmt_pivot->execute();
+        $stmt_pivot->close();
     }
     
     echo "Job details, skills, and pivot data inserted successfully";
 } else {
     echo "Error inserting job: " . $conn->error;
 }
+
+$stmt_job->close();
+$stmt_user_job->close();
+$stmt_check_skill->close();
 
 $conn->close();
 ?>

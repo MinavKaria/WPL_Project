@@ -5,10 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>YoungGigs</title>
-  <link rel="stylesheet" href="style.css">
+  
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap">
-
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
@@ -27,7 +27,7 @@ include 'authguard.php';
         <p class="heroLine">Empowering Youth through No Experience Job Opportunities</p>
 
         <div class="findContainer">
-          <a href="./jobpage.html" class="text-decoration-none text-white FindJobBtn"> Find a Job</a>
+          <a href="./jobpage.php" class="text-decoration-none text-white FindJobBtn"> Find a Job</a>
         </div>
       </div>
     </div>
@@ -42,9 +42,9 @@ include 'authguard.php';
       </div>
       <div class="dropdown">
         <div class="dropdown-content">
-          <a href="#">Location 1</a>
-          <a href="#">Location 2</a>
-          <a href="#">Location 3</a>
+          <a href="#">Mumbai</a>
+          <a href="#">Delhi</a>
+          <a href="#">Banglore</a>
         </div>
         <span class="searchLocation">Location
           <img src="assets/arrow.png" alt="" srcset="">
@@ -52,15 +52,15 @@ include 'authguard.php';
       </div>
       <div class="dropdown">
         <div class="dropdown-content">
-          <a href="#">Type 1</a>
-          <a href="#">Type 2</a>
-          <a href="#">Type 3</a>
+          <a href="#">Part-Time</a>
+          <a href="#">Full-Time</a>
+          <a href="#">Remote</a>
         </div>
         <span class="searchType" onclick="openTypeMenu()">Type
           <img src="assets/arrow.png" alt="" srcset="">
         </span>
       </div>
-      <button type="button" class="searchJobs" onclick="animateButton()">Search</button>
+      <button type="button" class="searchJobs" onclick="animateButton()"><a href="./jobpage.php" class="text-light text-decoration-none">Search</a></button>
       <img src="assets/loading.svg" alt="" class="unloading loader">
     </div>
   </div>
